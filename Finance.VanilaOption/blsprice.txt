@@ -1,0 +1,18 @@
+blsprice <- function(s0, x, r, t, sig, q){
+# returns the value of call and put options using the Black-Scholes pricing 
+# formula.
+# s0 is the current asset price, 
+# x is the exercise price, 
+# r is the risk-free interest rate,
+# T is the time to maturity of the option in years, sig is volatility
+# and q is the dividend rate of the asset. 
+
+   d1 <- ( log(s0/x) + ( r - q + (sig^2)/2 ) * t)/ ( sig * sqrt(t) )
+   d2 <- d1 - (sig*sqrt(t))
+   call <- s0*exp(-q*t)*pnorm(d1) - x*(exp(-r*t)*pnorm(d2))
+   put <- x*(exp(-r*t)*pnorm(-d2)) - s0*exp(-q*t)*pnorm(-d1)
+   invisible(call)
+   invisible(put)
+   res <- list(callp = call, putp = put);
+   return(res)
+}

@@ -1,0 +1,18 @@
+blsdelta <- function(s0,x,r,t,sig,q){
+# returns sensitivity in option value to change in the underlying security price.
+# SO is the current asset price, x is the exercise price, 
+# r is the risk-free interest rate,
+# T is the time to maturity of the option in years, 
+# sig is volatility
+# and q is the dividend rate of the asset. 
+
+   d1 <- ( log(s0/x) + ( r - q + (sig^2)/2 ) * t)/ ( sig * sqrt(t) )
+   cd <- exp(-q*t)*pnorm(d1)
+   pd <- cd - exp(-q*t)
+   invisible(cd)
+   invisible(pd)
+   res <- list(calld = cd, putd = pd);
+   return(res)
+   #print(cd)
+   #print(pd)
+}

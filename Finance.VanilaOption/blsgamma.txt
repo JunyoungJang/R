@@ -1,0 +1,15 @@
+blsgamma <- function(s0, x, r, t, sig, q){
+# returns sensitivity of gamma to change in the underlying security price.
+# SO is the current asset price, 
+# x is the exercise price, 
+# r is the risk-free interest rate,
+# T is the time to maturity of the option in years, 
+# sig is volatility
+# and q is the dividend rate of the asset. 
+
+   d1 <- ( log(s0/x) + ( r - q + (sig^2)/2 ) * t)/ ( sig * sqrt(t) )
+   g <- (dnorm(d1)*exp(-q*t))/(s0*sig*sqrt(t))
+   invisible(g)
+   return(g)
+   #print(g)
+}
